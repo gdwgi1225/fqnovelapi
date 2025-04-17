@@ -1,4 +1,4 @@
-{
+address{
   "log": {
     "disabled": false,
     "level": "info",
@@ -17,7 +17,7 @@
   "cache_file": {
     "enabled": true,
     "path": "/etc/sing-box/cache.db",
-    "store_fakeip": false
+    "store_fakeip": true
     }
   },
 
@@ -27,7 +27,7 @@
    [
      {"tag": "dns_direct", "address": "223.5.5.5", "address_strategy": "ipv4_only", "strategy": "ipv4_only", "detour": "🎯 全球直连"},
      {"tag": "dns_proxy", "address": "tls://8.8.8.8", "address_strategy": "ipv4_only", "strategy": "ipv4_only", "detour": "🚀 节点选择"},
-     {"tag": "dns_fakeip", "type": "fakeip", "inet4_range": "198.18.0.0/15", "inet6_range": "fc00::/18"}
+     {"tag": "dns_fakeip", "address": "fakeip"}
    ],
    "rules": 
    [
@@ -39,7 +39,12 @@
      {"server": "dns-fakeip", "rewrite_ttl": 1, "query_type": ["A", "AAAA"]}
    ],
    "final": "dns_proxy",
-   "strategy": "ipv4_only"
+   "strategy": "ipv4_only", 
+    "fakeip": {
+      "enabled": true,
+      "inet4_range": "198.18.0.0/15",
+      "inet6_range": "fc00::/18"
+    }
 },
 
 "inbounds": [
@@ -70,7 +75,7 @@
 ],
 
   "outbounds": [
-    { "tag": "🚀 节点选择", "type": "selector", "outbounds": [ "🐸 手动切换", "♻️ 自动选择", "🎯 全球直连"] },
+    { "tag": "🚀 节点选择", "type": "selector", "outbounds": [ "♻️ 自动选择", "🐸 手动切换", "🎯 全球直连"] },
     { "tag": "📹 YouTube", "type": "selector", "outbounds": ["🚀 节点选择", "♻️ 自动选择",  "🐸 手动切换"] },
     { "tag": "🤖 OpenAI", "type": "selector", "outbounds": ["🚀 节点选择", "♻️ 自动选择",  "🐸 手动切换"] },
     { "tag": "🍀 Google", "type": "selector", "outbounds": ["🚀 节点选择", "♻️ 自动选择",  "🐸 手动切换"] },
