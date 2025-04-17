@@ -37,7 +37,7 @@
      {"clash_mode": "Global", "server": "dns_proxy"},
      {"rule_set": "geosite-cn", "action": "route","server": "dns_direct"},
      {"rule_set": "geosite-geolocation-!cn", "server": "dns_proxy"},
-     {"query_type": ["A", "AAAA"],"server": "dns_fakeip"}
+     {"server": "dns-fakeip", "rewrite_ttl": 1, "query_type": ["A", "AAAA"]}
    ],
    "final": "dns_proxy",
    "strategy": "ipv4_only",
