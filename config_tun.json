@@ -64,7 +64,6 @@
     "listen_port": 53,
     "sniff": true,
     "tag": "dns-in"
-  } 
   }
 ],
 
